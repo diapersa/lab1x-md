@@ -11,14 +11,36 @@ class CarService:
                 print (car)
 
     def bubble_sort(self, comparator):
-        for car1 in self.get_all_cars():
-            for car2 in self.get_all_cars():
+        list=self.get_all_cars()
+        for i in range (0,len(list)):
+            for j in range (0,len(list)-1):
                 if comparator=="tokenMasina":
-                    if car1.tokenMasina<car2.tokenMasina:
-                        aux=car1
-                        car1=car2
-                        car2=aux
+                    if list[j].tokenMasina>list[j+1].tokenMasina:
+                        aux=list[j]
+                        list[j]=list[j+1]
+                        list[j+1]=aux
 
+                if comparator=="marca model":
+                    if list[j].marca>list[j+1].marca:
+                        aux=list[j]
+                        list[j]=list[j+1]
+                        list[j+1]=aux
+                    if list[j].marca==list[j+1].marca:
+                        if list[j].model > list[j + 1].model:
+                            aux = list[j]
+                            list[j] = list[j + 1]
+                            list[j + 1] = aux
+
+                if comparator=="marca model tokenMasina":
+                    if list[j].marca>list[j+1].marca:
+                        aux=list[j]
+                        list[j]=list[j+1]
+                        list[j+1]=aux
+                    if list[j].marca==list[j+1].marca:
+                        if list[j].model > list[j + 1].model:
+                            aux = list[j]
+                            list[j] = list[j + 1]
+                            list[j + 1] = aux
 
 
 
