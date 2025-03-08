@@ -7,8 +7,10 @@ class CarConsole:
         for car in car_list:
             print(car)
 
-    def search_cars(self):
-        pass
+    def search_car_by_token(self, car_token):
+        self.__car_service.search_car_by_token(car_token)
 
-    def sort_cars(self):
-        pass
+
+    def sort_cars(self, comparator):
+        self.__car_service.bubble_sort(comparator)
+        self.print_all_cars()

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Masina:
+class Car:
     marca: str
     model: str
     tokenMasina: str

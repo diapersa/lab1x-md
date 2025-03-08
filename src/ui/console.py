@@ -17,11 +17,11 @@ class ConsoleUI:
     def __create_commands(self):
         return {
             "PRINT-ALL": self.__car_console.print_all_cars,
-            "SEARCH": self.__car_console.search_cars,
-            "SORT tokenMasina": self.__car_console.sort_cars,
-            "SORT marca model": self.__car_console.sort_cars,
-            "SORT marca model tokenMasina": self.__car_console.sort_cars,
-            "SORT profit": self.__car_console.sort_cars,
+            "SEARCH": self.__car_console.search_car_by_token,
+            "SORT": self.__car_console.sort_cars,
+            # "SORT marca model": self.__car_console.sort_cars,
+            # "SORT marca model tokenMasina": self.__car_console.sort_cars,
+            # "SORT profit": self.__car_console.sort_cars,
             "help": self.__help,
         }
 

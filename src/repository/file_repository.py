@@ -1,4 +1,4 @@
-from src.domain.car import Masina
+from src.domain.car import Car
 from src.repository.car_repository import CarRepository
 
 
@@ -13,5 +13,5 @@ class FileRepository(CarRepository):
             for line in f:
                 line = line.strip()
                 array = line.split(' ')
-                new_car = Masina(array[0], array[1], array[2], int(array[3]), int(array[4]))
+                new_car = Car(array[0], array[1], array[2], int(array[3]), int(array[4]))
                 super().add_car(new_car)
