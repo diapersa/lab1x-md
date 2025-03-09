@@ -28,7 +28,7 @@ class ConsoleUI:
     def __print_commands(self, commands):
         print("\nChoose command: ", end="\n\t")
         print(*commands.keys(), "exit", sep=" --- ")
-        print("For HELP write: help <command>. E.g: help SORT tokenMasina")
+        print("For HELP write: help <command>. E.g: help SORT tokenMasina/ marca model/ marca model tokenMasina/ profit")
 
     def __read_commands(self):
         command = input("Command: ")
