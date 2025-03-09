@@ -1,3 +1,6 @@
+from tkinter.constants import RIGHT
+
+
 class CarService:
     def __init__(self, car_repository):
         self.__car_repository = car_repository
@@ -42,27 +45,45 @@ class CarService:
                             list[j] = list[j + 1]
                             list[j + 1] = aux
 
+    def binary_search_car_by_token(self, car_list, car_token, left, right):
+        while left <= right:
+            m = (left + right) // 2
+            if car_token == car_list[m].tokenMasina:
+                return m
+            else:
+                if car_token < car_list[m].tokenMasina:
+                    right = m - 1
+                else:
+                    left = m + 1
+        return -1
 
+    def in_order_quick_sort(self, car1, car2, comparator):
+        if comparator == "tokenMasina":
+            return car1.tokenMasina < car2.tokenMasina
+        elif comparator == "marca model":
+            return (car1.marca, car1.model) < (car2.marca, car2.model)
+        elif comparator == "marca model tokenMasina":
+            return (car1.marca, car1.model, car1.tokenMasina) < (car2.marca, car2.model, car2.tokenMasina)
+        return False
 
-    def __in_order(self, e1, e2):
-        pass
-
-    def __merge_sort(self, car_list):
+    def quick_sort(self, car_list, comparator):
         if len(car_list) <= 1:
             return car_list
 
-        m = len(car_list) // 2
-        left = self.__merge_sort(car_list[:m])
-        right = self.__merge_sort(car_list[m:])
-        return self.merge(left, right)
+        p = [x for x in car_list if x == car_list[0]]
+        left = [x for x in car_list if self.in_order_quick_sort(x, p[0], comparator)]
+        right = [x for x in car_list if self.in_order_quick_sort(p[0], x, comparator)]
 
-    def merge(self, left, right):
-        rez = []
-        while len(left) > 0 and len(right) > 0:
-            if self.__in_order(left[0], right[0]):
-                rez.append(left.pop(0))
-            else:
-                rez.append(right.pop(0))
-        rez.extend(left + right)
-        return rez
+        return self.quick_sort(left, comparator) + p + self.quick_sort(right, comparator)
+
+
+
+
+
+
+
+
+
+
+
 
