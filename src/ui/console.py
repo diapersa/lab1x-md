@@ -7,7 +7,7 @@ class ConsoleUI:
         help_command = {
             'PRINT-ALL': "Usage: PRINT-ALL",
             'SEARCH': "Usage: SEARCH <tokenMasina>",
-            'SORT': "Usage: SORT <tokenMasina>"
+            'SORT': "Usage: SORT <tokenMasina>, SORT <marca model>, SORT <marca model tokenMasina>, SORT <profit>"
         }
         try:
             print(help_command[cmd])

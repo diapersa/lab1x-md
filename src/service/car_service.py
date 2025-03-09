@@ -1,5 +1,7 @@
 from tkinter.constants import RIGHT
 
+from src.domain.car import Car
+import time
 
 class CarService:
     def __init__(self, car_repository):
@@ -64,6 +66,8 @@ class CarService:
             return (car1.marca, car1.model) < (car2.marca, car2.model)
         elif comparator == "marca model tokenMasina":
             return (car1.marca, car1.model, car1.tokenMasina) < (car2.marca, car2.model, car2.tokenMasina)
+        elif comparator == "profit":
+            return Car.profit(car1) < Car.profit(car2)
         return False
 
     def quick_sort(self, car_list, comparator):
