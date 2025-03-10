@@ -15,36 +15,82 @@ class CarService:
             if car.tokenMasina==car_token:
                 return car
 
+    def compare_bubble_sort(self, car1, car2, comparator):
+        if comparator == "tokenMasina":
+            if car1.tokenMasina > car2.tokenMasina:
+                car1,car2= car2, car1
+
+        if comparator == "marca model":
+            if car1.marca > car2.marca:
+                car1,car2= car2, car1
+            if car1.marca == car2.marca:
+                if car1.model > car2.model:
+                    car1,car2= car2, car1
+
+        if comparator == "marca model tokenMasina":
+            if car1.marca > car2.marca:
+                car1,car2= car2, car1
+            if car1.marca == car2.marca:
+                if car1.model > car2.model:
+                    car1,car2= car2, car1
+                if car1.model == car2.model:
+                    if car1.tokenMasina == car2.tokenMasina:
+                        car1,car2= car2, car1
+
+        if comparator == "profit":
+            if car1.profit > car2.profit:
+                car1, car2= car2, car1
+        return car1, car2
+
+    def compare_tokenMasina(self, car1, car2):
+        if car1.tokenMasina > car2.tokenMasina:
+            return 2
+        else:
+            if car1.tokenMasina == car2.tokenMasina:
+                return 0
+        return -2
+
+    def compare_marca_model(self, car1, car2):
+        if car1.marca > car2.marca:
+            return 2
+        else:
+            if car1.marca == car2.marca:
+                pass
+            #TODO model
+        return -2
+
+    def compare_marca_model_tokenMasina(self, car1, car2):
+        if car1.marca > car2.marca:
+            return 2
+        else:
+            if car1.marca == car2.marca:
+                pass
+            #TODO model+tokenMasina
+        return -2
+
+
+
     def bubble_sort(self, comparator):
         list=self.get_all_cars()
         for i in range (0,len(list)):
             for j in range (0,len(list)-1):
-                if comparator=="tokenMasina":
-                    if list[j].tokenMasina>list[j+1].tokenMasina:
-                        list[j],list[j+1]=list[j+1],list[j]
+                if comparator(list[j], list[j+1])>1:
+                    list[j], list[j+1]=list[j+1], list[j]
+        for car in list:
+            print(car)
 
-                if comparator=="marca model":
-                    if list[j].marca>list[j+1].marca:
-                        list[j],list[j+1]=list[j+1],list[j]
-                    if list[j].marca==list[j+1].marca:
-                        if list[j].model > list[j + 1].model:
-                            list[j],list[j+1]=list[j+1],list[j]
 
-                if comparator=="marca model tokenMasina":
-                    if list[j].marca>list[j+1].marca:
-                        list[j],list[j+1]=list[j+1],list[j]
-                    if list[j].marca==list[j+1].marca:
-                        if list[j].model > list[j + 1].model:
-                            list[j],list[j+1]=list[j+1],list[j]
-                        if list[j].model == list[j + 1].model:
-                            if list[j].tokenMasina == list[j + 1].tokenMasina:
-                                list[j], list[j + 1] = list[j + 1], list[j]
-
-                if comparator=="profit":
-                    if list[j].profit > list[j + 1].profit:
-                        list[j], list[j + 1] = list[j + 1], list[j]
 
         return self.get_all_cars()
+
+
+
+
+
+
+
+
+
 
     def binary_search_car_by_token(self, car_list, car_token, left, right):
         while left <= right:
