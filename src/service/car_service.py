@@ -11,36 +11,10 @@ class CarService:
         return self.__car_repository.get_all_cars()
 
     def linear_search_car_by_token(self, car_token):
-        for car in self.get_all_cars():
+        car_list = self.get_all_cars()
+        for car in car_list:
             if car.tokenMasina==car_token:
                 return car
-
-    def compare_bubble_sort(self, car1, car2, comparator):
-        if comparator == "tokenMasina":
-            if car1.tokenMasina > car2.tokenMasina:
-                car1,car2= car2, car1
-
-        if comparator == "marca model":
-            if car1.marca > car2.marca:
-                car1,car2= car2, car1
-            if car1.marca == car2.marca:
-                if car1.model > car2.model:
-                    car1,car2= car2, car1
-
-        if comparator == "marca model tokenMasina":
-            if car1.marca > car2.marca:
-                car1,car2= car2, car1
-            if car1.marca == car2.marca:
-                if car1.model > car2.model:
-                    car1,car2= car2, car1
-                if car1.model == car2.model:
-                    if car1.tokenMasina == car2.tokenMasina:
-                        car1,car2= car2, car1
-
-        if comparator == "profit":
-            if car1.profit > car2.profit:
-                car1, car2= car2, car1
-        return car1, car2
 
     def compare_tokenMasina(self, car1, car2):
         if car1.tokenMasina > car2.tokenMasina:
@@ -55,20 +29,40 @@ class CarService:
             return 2
         else:
             if car1.marca == car2.marca:
-                pass
-            #TODO model
+                if car1.model > car2.model:
+                    return 2
+                else:
+                    if car1.model == car2.model:
+                        return 0
         return -2
+
 
     def compare_marca_model_tokenMasina(self, car1, car2):
         if car1.marca > car2.marca:
             return 2
         else:
             if car1.marca == car2.marca:
-                pass
-            #TODO model+tokenMasina
+                if car1.model > car2.model:
+                    return 2
+                else:
+                    if car1.model == car2.model:
+                        if car1.tokenMasina > car2.tokenMasina:
+                            return 2
+                        else:
+                            if car1.tokenMasina == car2.tokenMasina:
+                                return 0
         return -2
 
 
+    def compare_profit(self, car1, car2):
+        profit_car1 = Car.profit(car1)
+        profit_car2 = Car.profit(car2)
+        if profit_car1 > profit_car2:
+            return 2
+        else:
+            if profit_car1 == profit_car2:
+                return 0
+        return -2
 
     def bubble_sort(self, comparator):
         list=self.get_all_cars()
@@ -79,18 +73,7 @@ class CarService:
         for car in list:
             print(car)
 
-
-
         return self.get_all_cars()
-
-
-
-
-
-
-
-
-
 
     def binary_search_car_by_token(self, car_list, car_token, left, right):
         while left <= right:
@@ -104,38 +87,15 @@ class CarService:
                     left = m + 1
         return -1
 
-    def in_order_quick_sort(self, car1, car2, comparator):
-        if comparator == "tokenMasina":
-            return car1.tokenMasina < car2.tokenMasina
-        elif comparator == "marca model":
-            return (car1.marca, car1.model) < (car2.marca, car2.model)
-        elif comparator == "marca model tokenMasina":
-            return (car1.marca, car1.model, car1.tokenMasina) < (car2.marca, car2.model, car2.tokenMasina)
-        elif comparator == "profit":
-            return Car.profit(car1) < Car.profit(car2)
-        return False
 
     def quick_sort(self, car_list, comparator):
         if len(car_list) <= 1:
             return car_list
 
         p = [x for x in car_list if x == car_list[0]]
-        left = [x for x in car_list if self.in_order_quick_sort(x, p[0], comparator)]
-        right = [x for x in car_list if self.in_order_quick_sort(p[0], x, comparator)]
+        left = [x for x in car_list if comparator(x, p[0]) == -2]
+        right = [x for x in car_list if comparator(p[0], x) == -2]
 
         return self.quick_sort(left, comparator) + p + self.quick_sort(right, comparator)
-
-
-    ###
-
-
-
-
-
-
-
-
-
-
 
 

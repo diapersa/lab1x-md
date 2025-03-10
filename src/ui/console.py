@@ -6,8 +6,6 @@ class CarConsole:
     def __init__(self, car_service):
         self.__car_service = car_service
 
-
-
     def get_all_cars(self):
         return self.__car_service.get_all_cars()
 
@@ -21,7 +19,8 @@ class CarConsole:
 
         ###### linear search
         start_time1 = time.perf_counter()
-        print(self.__car_service.linear_search_car_by_token(car_token))
+        car = self.__car_service.linear_search_car_by_token(car_token)
+        print(car)
         end_time1 = time.perf_counter()
 
         # ## binary search and execution time
@@ -94,33 +93,44 @@ class CarConsole:
 
 
     def __options(self):
-        print("PRINT-ALL-- SEARCH-- SORT tokenMasina-- SORT marca model-- SORT marca model tokenMasina-- help(vom vedea)"
+        print("\nPRINT-ALL-- SEARCH-- SORT tokenMasina-- SORT marca model-- SORT marca model tokenMasina-- SORT profit-- help(vom vedea)"
 
         )
 
     def run_commands(self):
+        car_list = self.get_all_cars()
         self.__options()
-        cmd = input("Choose an option: ")
+        cmd = input("\nChoose an option: ")
         while cmd!="exit":
             match cmd:
                 case "PRINT-ALL":
                     return self.print_all_cars()
                 case "SEARCH":
+                    # car_token = input("Enter a token: ")
                     pos= cmd.find(" ")
                     car_token=cmd[pos:]
-                    return self.search_car_by_token(car_token)
+                    self.search_car_by_token(car_token)
                     #TODO nu merge!!
                 case "SORT tokenMasina":
-                    return self.__car_service.bubble_sort(self.__car_service.compare_tokenMasina)
+                    # return self.__car_service.bubble_sort(self.__car_service.compare_tokenMasina)
+                    sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_tokenMasina)
+                    self.__print_cars(sorted_car_list)
                 case "SORT marca model":
-                    return self.__car_service.bubble_sort(self.__car_service.compare_tokenMasina)
+                    # return self.__car_service.bubble_sort(self.__car_service.compare_marca_model)
+                    sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_marca_model)
+                    self.__print_cars(sorted_car_list)
                 case "SORT marca model tokenMasina":
-                    return self.__car_service.bubble_sort(self.__car_service.compare_tokenMasina)
+                    # return self.__car_service.bubble_sort(self.__car_service.compare_marca_model_tokenMasina)
+                    sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_marca_model_tokenMasina)
+                    self.__print_cars(sorted_car_list)
+                case "SORT profit":
+                    # return self.__car_service.bubble_sort(self.__car_service.compare_profit)
+                    sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_profit)
+                    self.__print_cars(sorted_car_list)
                 case "exit":
                     return "bye"
             self.__options()
             cmd = input("Choose an option: ")
-
 
 
 
