@@ -24,8 +24,7 @@ class CarConsole:
         ## binary search and execution time
         ## for this method, the car list MUST BE SORTED by the token in this case
 
-        sorted_car_list = self.__car_service.quick_sort(car_list, "tokenMasina")
-        self.__print_cars(sorted_car_list)
+        sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_tokenMasina)
 
         ### time.perf_counter() is more precise than time.time() !!!!!!!!!!!
         start_time2 = time.perf_counter()
@@ -49,25 +48,24 @@ class CarConsole:
         car_list = self.get_all_cars()
 
         ######## bubble sort and execution time
-        self.__car_service.bubble_sort(comparator)
 
-        start_time1 = time.perf_counter()
-        bubble_sorted_car_list = self.__car_service.bubble_sort(comparator)
-        end_time1 = time.perf_counter()
-        self.__print_cars(bubble_sorted_car_list)
+        # self.__car_service.bubble_sort(comparator)
+        #
+        # start_time1 = time.perf_counter()
+        # bubble_sorted_car_list = self.__car_service.bubble_sort(comparator)
+        # end_time1 = time.perf_counter()
+        # self.__print_cars(bubble_sorted_car_list)
 
-        print(f"\nThe execution time for bubble sort is: {end_time1 - start_time1:.9f} seconds")
+        # print(f"\nThe execution time for bubble sort is: {end_time1 - start_time1:.9f} seconds")
 
         # ######## quick sort and execution time
         # ### time.perf_counter() is more precise than time.time() !!!!!!!!!!!
-        # start_time2 = time.perf_counter()
-        # quick_sorted_car_list = self.__car_service.quick_sort(car_list, comparator)
-        # end_time2 = time.perf_counter()
-        # self.__print_cars(quick_sorted_car_list)
+        start_time2 = time.perf_counter()
+        quick_sorted_car_list = self.__car_service.quick_sort(car_list, comparator)
+        end_time2 = time.perf_counter()
+        self.__print_cars(quick_sorted_car_list)
 
-        # {end_time2 - start_time2:.9f}
-        # .9 for zecimale dupa virgula and f for floating-point (zecimal)
-        # print(f"\nThe execution time for quick sort is: {end_time2 - start_time2:.9f} seconds")
+        print(f"\nThe execution time for quick sort is: {end_time2 - start_time2:.9f} seconds")
 
 
 
@@ -103,8 +101,8 @@ class CarConsole:
                 case "SORT tokenMasina":
 
                     start_time1 = time.perf_counter()
-                    sorted_car_list= self.__car_service.bubble_sort(self.__car_service.compare_tokenMasina)
-                    # sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_tokenMasina)
+                    # sorted_car_list= self.__car_service.bubble_sort(self.__car_service.compare_tokenMasina)
+                    sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_tokenMasina)
                     end_time1 = time.perf_counter()
                     self.__print_cars(sorted_car_list)
 
@@ -114,8 +112,8 @@ class CarConsole:
                 case "SORT marca model":
 
                     start_time1 = time.perf_counter()
-                    sorted_car_list = self.__car_service.bubble_sort(self.__car_service.compare_marca_model)
-                    # sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_marca_model)
+                    # sorted_car_list = self.__car_service.bubble_sort(self.__car_service.compare_marca_model)
+                    sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_marca_model)
                     end_time1 = time.perf_counter()
                     self.__print_cars(sorted_car_list)
 
@@ -125,8 +123,8 @@ class CarConsole:
                 case "SORT marca model tokenMasina":
 
                     start_time1 = time.perf_counter()
-                    sorted_car_list = self.__car_service.bubble_sort(self.__car_service.compare_marca_model_tokenMasina)
-                    # sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_marca_model_tokenMasina)
+                    # sorted_car_list = self.__car_service.bubble_sort(self.__car_service.compare_marca_model_tokenMasina)
+                    sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_marca_model_tokenMasina)
                     end_time1 = time.perf_counter()
                     self.__print_cars(sorted_car_list)
 
@@ -135,8 +133,8 @@ class CarConsole:
                 case "SORT profit":
 
                     start_time1 = time.perf_counter()
-                    sorted_car_list = self.__car_service.bubble_sort(self.__car_service.compare_profit)
-                    # sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_profit)
+                    # sorted_car_list = self.__car_service.bubble_sort(self.__car_service.compare_profit)
+                    sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_profit)
                     end_time1 = time.perf_counter()
                     self.__print_cars(sorted_car_list)
 
