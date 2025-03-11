@@ -14,3 +14,6 @@ class Car:
 
     def profit(self):
         return self.pretVanzare - self.pretAchizitie
+
+    # def __lt__(self, other):
+    #
