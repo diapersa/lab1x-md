@@ -9,47 +9,39 @@ class CarConsole:
     def get_all_cars(self):
         return self.__car_service.get_all_cars()
 
-    def print_all_cars(self):
-        car_list = self.get_all_cars()
-        for car in car_list:
-            print(car)
-
     def search_car_by_token(self, car_token):
         car_list = self.get_all_cars()
 
-        ###### linear search
-        start_time1 = time.perf_counter()
-        car = self.__car_service.linear_search_car_by_token(car_token)
-        print(car)
-        end_time1 = time.perf_counter()
+        # ###### linear search
+        # start_time1 = time.perf_counter()
+        # car = self.__car_service.linear_search_car_by_token(car_token)
+        # print(car)
+        # end_time1 = time.perf_counter()
+        #
+        # print(f"\nThe execution time for linear search is: {end_time1 - start_time1:.9f} seconds")
 
-        # ## binary search and execution time
-        # ## for this method, the car list MUST BE SORTED by the token in this case
-        #
-        # sorted_car_list = self.__car_service.quick_sort(car_list, "tokenMasina")
-        # self.__print_cars(sorted_car_list)
-        #
-        # ### time.perf_counter() is more precise than time.time() !!!!!!!!!!!
-        # start_time2 = time.perf_counter()
-        # pos_found_car = self.__car_service.binary_search_car_by_token(sorted_car_list, car_token, 0, len(sorted_car_list) - 1)
-        # end_time2 = time.perf_counter()
-        #
-        # if pos_found_car != -1:
-        #     print("The car is found! ", sorted_car_list[pos_found_car])
-        # else:
-        #     print("The car was not found!")
-        # print(f"\nThe execution time for binary search is: {end_time2 - start_time2:.9f} seconds")
 
-        print(f"\nThe execution time for linear search is: {end_time1 - start_time1:.9f} seconds")
+        ## binary search and execution time
+        ## for this method, the car list MUST BE SORTED by the token in this case
+
+        sorted_car_list = self.__car_service.quick_sort(car_list, "tokenMasina")
+        self.__print_cars(sorted_car_list)
+
+        ### time.perf_counter() is more precise than time.time() !!!!!!!!!!!
+        start_time2 = time.perf_counter()
+        pos_found_car = self.__car_service.binary_search_car_by_token(sorted_car_list, car_token, 0, len(sorted_car_list) - 1)
+        end_time2 = time.perf_counter()
+
+        if pos_found_car != -1:
+            print("The car is found! ", sorted_car_list[pos_found_car])
+        else:
+            print("The car was not found!")
+        print(f"\nThe execution time for binary search is: {end_time2 - start_time2:.9f} seconds")
+
 
 
     def __print_cars(self, car_list):
         for car in car_list:
-            print(car)
-
-
-    def bubble_sort(self, comparator):
-        for car in self.__car_service.bubble_sort(comparator):
             print(car)
 
 
@@ -104,29 +96,52 @@ class CarConsole:
         while cmd!="exit":
             match cmd:
                 case "PRINT-ALL":
-                    return self.print_all_cars()
+                    return self.__print_cars(self.get_all_cars())
                 case "SEARCH":
-                    # car_token = input("Enter a token: ")
-                    pos= cmd.find(" ")
-                    car_token=cmd[pos:]
+                    car_token = input("Enter a token: ")
                     self.search_car_by_token(car_token)
-                    #TODO nu merge!!
                 case "SORT tokenMasina":
-                    # return self.__car_service.bubble_sort(self.__car_service.compare_tokenMasina)
-                    sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_tokenMasina)
+
+                    start_time1 = time.perf_counter()
+                    sorted_car_list= self.__car_service.bubble_sort(self.__car_service.compare_tokenMasina)
+                    # sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_tokenMasina)
+                    end_time1 = time.perf_counter()
                     self.__print_cars(sorted_car_list)
+
+                    print(f"\nThe execution time is: {end_time1 - start_time1:.9f} seconds")
+
+
                 case "SORT marca model":
-                    # return self.__car_service.bubble_sort(self.__car_service.compare_marca_model)
-                    sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_marca_model)
+
+                    start_time1 = time.perf_counter()
+                    sorted_car_list = self.__car_service.bubble_sort(self.__car_service.compare_marca_model)
+                    # sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_marca_model)
+                    end_time1 = time.perf_counter()
                     self.__print_cars(sorted_car_list)
+
+                    print(f"\nThe execution time is: {end_time1 - start_time1:.9f} seconds")
+
+
                 case "SORT marca model tokenMasina":
-                    # return self.__car_service.bubble_sort(self.__car_service.compare_marca_model_tokenMasina)
-                    sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_marca_model_tokenMasina)
+
+                    start_time1 = time.perf_counter()
+                    sorted_car_list = self.__car_service.bubble_sort(self.__car_service.compare_marca_model_tokenMasina)
+                    # sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_marca_model_tokenMasina)
+                    end_time1 = time.perf_counter()
                     self.__print_cars(sorted_car_list)
+
+                    print(f"\nThe execution time is: {end_time1 - start_time1:.9f} seconds")
+
                 case "SORT profit":
-                    # return self.__car_service.bubble_sort(self.__car_service.compare_profit)
-                    sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_profit)
+
+                    start_time1 = time.perf_counter()
+                    sorted_car_list = self.__car_service.bubble_sort(self.__car_service.compare_profit)
+                    # sorted_car_list = self.__car_service.quick_sort(car_list, self.__car_service.compare_profit)
+                    end_time1 = time.perf_counter()
                     self.__print_cars(sorted_car_list)
+
+                    print(f"\nThe execution time is: {end_time1 - start_time1:.9f} seconds")
+
                 case "exit":
                     return "bye"
             self.__options()

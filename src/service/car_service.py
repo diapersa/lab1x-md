@@ -70,10 +70,9 @@ class CarService:
             for j in range (0,len(list)-1):
                 if comparator(list[j], list[j+1])>1:
                     list[j], list[j+1]=list[j+1], list[j]
-        for car in list:
-            print(car)
+        return list
 
-        return self.get_all_cars()
+
 
     def binary_search_car_by_token(self, car_list, car_token, left, right):
         while left <= right:
